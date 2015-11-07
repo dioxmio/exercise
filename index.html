@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Carroussel Example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/app.css" rel="stylesheet">
+  </head>
+  <body>
+
+
+    <script type="text/template" id="carousel-template">
+        <ul class="carousel-items-container" style="width:<%= this.getComponentWidth()%>px">
+        <% var imageWidth = this.imageWidth;%> 
+        <% _.each(items, function(item) { %> 
+            <li style="width:<%= imageWidth %>px;" class="carousel-item">
+              <img width="<%= imageWidth %>" src="<%= item.getRandImage() %>">
+            </li>              
+        <% }); %>
+        </ul>
+        <button class="navigate-previous round-button" disabled="disabled"><</button>
+        <button class="navigate-next round-button">></button>
+    </script>      
+
+    <script type="text/template" id="image-template">
+        <% _.each(items, function(item) { %> 
+            <li style="width:<%= imageWidth %>px;" class="carousel-item">
+              <img width="<%= imageWidth %>" src="<%= item.getRandImage() %>">
+            </li>              
+        <% }); %>
+    </script>
+
+    <div class='container'>
+      <div class='app-title'>
+        <h1>Carousel example</h1>
+        The carousel component takes 3 parameters: <br/>
+        1) the collection<br/>
+        2) the number of items to display per page<br/>
+        3) the number of initially lazy loaded images<br/>
+      </div>
+      <div>
+        <div id='carousel-example'>
+          Loading...
+        </div>
+      </div>
+    </div>
+
+    <script src="js/jquery.js"></script>
+    <script src="js/underscore.js"></script>
+    <script src="js/backbone.js"></script>
+    
+    <script src="js/stella-dot-app.js"></script>
+    <script src="js/mockServer.js"></script>
+    <script src="js/sinon-1.10.0.js"></script>
+
+    <script>
+      $(function() { 
+
+        //mock server to handle all ajax requests transparently 
+        MockServer.init();
+        
+        //backbone application
+        StellaDotApp.init($('#carousel-example')); 
+        
+      });
+    </script>
+  </body>
+</html>
+
+
+
+
